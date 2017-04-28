@@ -11,11 +11,6 @@ function printHelp() {
     echo "Use --readme for more information and examples."
 }
 
-function printReadme() {
-    cat /README.md
-    echo "TIP: Read this in HTML format here: https://github.com/atmoz/sftp"
-}
-
 function createUser() {
     IFS=':' read -a param <<< $@
     user="${param[0]}"
@@ -67,12 +62,12 @@ function createUser() {
         usermod -p "*" $user # disabled password
     fi
 
-#     # Add SSH keys to authorized_keys with valid permissions
-#     if [ -d /home/$user/.ssh/keys ]; then
-#         cat /home/$user/.ssh/keys/* >> /home/$user/.ssh/authorized_keys
-#         chown $user /home/$user/.ssh/authorized_keys
-#         chmod 600 /home/$user/.ssh/authorized_keys
-#     fi
+    # Add SSH keys to authorized_keys with valid permissions
+    if [ -d /home/$user/.ssh/keys ]; then
+        cat /home/$user/.ssh/keys/* >> /home/$user/.ssh/authorized_keys
+        chown $user /home/$user/.ssh/authorized_keys
+        chmod 600 /home/$user/.ssh/authorized_keys
+    fi
 
     # Make sure dirs exists and has correct permissions
     if [ -n "$dir" ]; then
@@ -137,16 +132,8 @@ if [ ! -f "$userConfFinalPath" ]; then
     fi
 fi
 
-# # Source custom scripts, if any
-# if [ -d /etc/sftp.d ]; then
-#     for f in /etc/sftp.d/*; do
-#         if [ -x "$f" ]; then
-#             echo "Running $f ..."
-#             $f
-#         fi
-#     done
-#     unset f
-# fi
+/usr/sbin/vsftpd -obackground=YES
+exec /usr/sbin/sshd -D -e
 
-# exec /usr/sbin/sshd -D -e
-exec /usr/sbin/vsftpd
+
+
