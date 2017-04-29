@@ -19,4 +19,5 @@ In addition this container also provides additional support for the following:
 
 ## Cavets
 
-This container is intended to be a tool for integration testing. It is *NOT* intended for production use.
+This container is intended to be a tool for integration testing. It is *NOT* intended for production use, as it is
+not considered secure.
