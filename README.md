@@ -6,7 +6,7 @@
 
 ## Mission
 
-Provide a docker container that provides SFTP and FTP protocols suitable for running in an integration testing
+A docker container that provides SFTP and FTP protocols suitable for running in an integration testing
 environment.
 
 The container is entirely influenced by the [sftp](https://github.com/atmoz/sftp) container. In fact it is configured
