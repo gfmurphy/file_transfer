@@ -14,7 +14,7 @@ exactly the same way. Please refer to that project's readme for more details.
 
 In addition this container also provides additional support for the following:
 
-* The FTP protocol
+* The FTP protocol (PASV mode only supported)
 * Stable host keys
 
 ## Cavets
